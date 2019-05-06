@@ -14,36 +14,36 @@ import RxSwift
 
 public extension ObservableType {
 
-  public func retryOnConnect(timeout: TimeInterval) -> Observable<E> {
+    func retryOnConnect(timeout: Int) -> Observable<Element> {
     return retryWhen { _ in
       return Reachability.rx.isConnected
-        .timeout(timeout, scheduler: MainScheduler.asyncInstance)
+        .timeout(DispatchTimeInterval.seconds(timeout),
+                 scheduler: MainScheduler.asyncInstance)
     }
   }
   
   func retryOnConnect(
-    timeout: TimeInterval,
+    timeout: Int,
     predicate: @escaping (Swift.Error) -> Bool
-  ) -> Observable<E> {
+  ) -> Observable<Element> {
     return retryWhen {
       return $0
         .filter(predicate)
         .flatMap { _ in
+
           Reachability
             .rx
             .isConnected
-            .timeout(
-              timeout,
-              scheduler: MainScheduler.asyncInstance
-          )
+            .timeout(DispatchTimeInterval.seconds(timeout),
+                     scheduler: MainScheduler.asyncInstance)
         }
     }
   }
   
   func retryLatestOnConnect(
-    timeout: TimeInterval,
+    timeout: Int,
     predicate: @escaping (Swift.Error) -> Bool
-    ) -> Observable<E> {
+    ) -> Observable<Element> {
     return retryWhen {
       return $0
         .filter(predicate)
@@ -51,10 +51,8 @@ public extension ObservableType {
           Reachability
             .rx
             .isConnected
-            .timeout(
-              timeout,
-              scheduler: MainScheduler.asyncInstance
-            )
+            .timeout(DispatchTimeInterval.seconds(timeout),
+                     scheduler: MainScheduler.asyncInstance)
         }
     }
   }

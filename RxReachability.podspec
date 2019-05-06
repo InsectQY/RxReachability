@@ -8,8 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = 'RxReachability'
-  s.version          = '0.1.8'
+  s.version          = '0.2.0'
   s.summary          = 'RxSwift bindings for Reachability'
+
 
   s.description      = <<-DESC
   RxReachability adds easy to use RxSwift bindings for [ReachabilitySwift](https://github.com/ashleymills/Reachability.swift).
@@ -22,17 +23,18 @@ Pod::Spec.new do |s|
                         'Bruno Oliveira'    => 'bm.oliveira.dev@gmail.com',
                         'RxSwiftCommunity'  => 'https://github.com/RxSwiftCommunity' 
                       }
-  s.source            = { :git => 'https://github.com/RxSwiftCommunity/RxReachability.git', :tag => s.version.to_s }
+  s.source            = { :git => 'https://github.com/InsectQY/RxReachability.git', :tag => s.version.to_s }
   s.social_media_url  = 'https://rxswift.slack.com'
   s.source_files      = 'RxReachability/Sources/**/*'
-  
+  s.swift_version = '5.0'
+
   s.ios.deployment_target   = '8.0'
   s.osx.deployment_target   = '10.10'
   s.tvos.deployment_target  = '9.0'
 
   s.frameworks = 'Foundation'
 
-  s.dependency 'ReachabilitySwift', '~> 4.3.0'
-  s.dependency 'RxSwift', '~> 4'
-  s.dependency 'RxCocoa', '~> 4'
+  s.dependency 'ReachabilitySwift'
+  s.dependency 'RxSwift'
+  s.dependency 'RxCocoa'
 end
